@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IOpenStoryComponent } from "../types/story";
 import ProgressBar from "./ProgressBar";
+
+let timer: any;
+let interval: any;
 
 function OpenStoryComponent(props: IOpenStoryComponent) {
   const { setOpenStoryData, stories, totalStoriesCount } = props;
@@ -18,25 +21,6 @@ function OpenStoryComponent(props: IOpenStoryComponent) {
     image.src = imageUrl;
   }, [imageUrl]);
 
-  let timer: any;
-  useEffect(() => {
-    timer = setTimeout(() => {
-      handleRightClick();
-    }, 5000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [imageUrl]);
-  let interval: any;
-  useEffect(() => {
-    if (progress < 5000) {
-      interval = setInterval(() => {
-        setProgress((prevProgress) => prevProgress + 10);
-      }, 10);
-    }
-    return () => clearInterval(interval);
-  }, [index]);
-
   const handleLeftClick = () => {
     if (index !== 0) {
       setOpenStoryData({
@@ -47,7 +31,7 @@ function OpenStoryComponent(props: IOpenStoryComponent) {
     }
   };
 
-  const handleRightClick = () => {
+  const handleRightClick = useCallback(() => {
     if (index !== totalStoriesCount - 1) {
       setOpenStoryData({
         index: index + 1,
@@ -57,7 +41,25 @@ function OpenStoryComponent(props: IOpenStoryComponent) {
     } else {
       setOpenStoryData(null);
     }
-  };
+  }, [index, setOpenStoryData, stories, totalStoriesCount]);
+
+  useEffect(() => {
+    timer = setTimeout(() => {
+      handleRightClick();
+    }, 5000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [imageUrl, handleRightClick]);
+
+  useEffect(() => {
+    if (progress < 5000) {
+      interval = setInterval(() => {
+        setProgress((prevProgress) => prevProgress + 10);
+      }, 10);
+    }
+    return () => clearInterval(interval);
+  }, [index, progress]);
 
   return (
     <div className="story-container">

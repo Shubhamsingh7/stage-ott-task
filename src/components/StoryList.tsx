@@ -11,9 +11,12 @@ interface IStoryList {
 function StoryList(props: IStoryList) {
   const { stories } = useStoryContext();
   const { openStoryData, setOpenStoryData } = props;
-  const handleThumnailClick = useCallback((story: Story, index: number) => {
-    setOpenStoryData({ story, index });
-  }, []);
+  const handleThumnailClick = useCallback(
+    (story: Story, index: number) => {
+      setOpenStoryData({ story, index });
+    },
+    [setOpenStoryData]
+  );
 
   return (
     <div
