@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { StoryProvider } from "./utils/provider/StoryProvider";
+import "./App.css";
+import StoryList from "./components/StoryList";
+import { OpenStoryData } from "./types/story";
 
-function App() {
+const App = () => {
+  const [openStoryData, setOpenStoryData] = useState<OpenStoryData | null>(
+    null
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="app"
+      onClick={() => {
+        setOpenStoryData(null);
+      }}
+    >
+      <h1 className="page-heading">Instagram Story Feature</h1>
+      <StoryProvider>
+        <StoryList
+          setOpenStoryData={setOpenStoryData}
+          openStoryData={openStoryData}
+        />
+      </StoryProvider>
     </div>
   );
-}
+};
 
 export default App;
