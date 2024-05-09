@@ -1,6 +1,6 @@
 # Instagram story feature
 
-This project is deployed on netlyfy [App Url](https://preeminent-churros-f50c40.netlify.app/).
+This project is deployed on netlyfy [App Url](https://stage-ott-task.netlify.app/).
 
 ## Available Scripts
 
