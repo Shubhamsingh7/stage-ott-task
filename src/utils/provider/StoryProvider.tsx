@@ -4,7 +4,7 @@ import useFetchData from "../../hooks/useFetchData";
 const StoryProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { data, loading, error } = useFetchData("/stories");
+  const { data, loading, error } = useFetchData("/photos?_limit=10");
 
   if (loading) {
     return <div>Loading...</div>;

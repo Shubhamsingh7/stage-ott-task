@@ -21,9 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "node server.ts",
-    "build": "react-scripts build",
-    "test": "react-scripts test"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +43,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-typescript": "^7.24.1"
+    "@babel/preset-typescript": "^7.24.1",
+    "nodemon": "^3.1.0"
   }
 }
